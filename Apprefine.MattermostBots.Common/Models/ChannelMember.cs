@@ -28,18 +28,9 @@ namespace Apprefine.MattermostBots.Common.Models
         public int MentionCount { get; set; }
 
         [JsonProperty("notify_props")]
-        public Notify_Props NotifyProps { get; set; }
+        public NotificationProperties NotifyProps { get; set; }
 
         [JsonProperty("last_update_at")]
         public long LastUpdateAt { get; set; }
     }
-
-    public class Notify_Props
-    {
-        public string desktop { get; set; }
-        public string email { get; set; }
-        public string mark_unread { get; set; }
-        public string push { get; set; }
-    }
-
 }

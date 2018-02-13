@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SkypeBot.Resources {
+namespace Apprefine.MattermostBots.SkypeBot.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SkypeBot.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SkypeBot.Resources.Langs", typeof(Langs).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Apprefine.MattermostBots.SkypeBot.Resources.Langs", typeof(Langs).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -84,6 +84,17 @@ namespace SkypeBot.Resources {
         internal static string SaveIdUsage {
             get {
                 return ResourceManager.GetString("SaveIdUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following commands are available:
+        ///- `/skype id YOUR_ID`  - saves your skype id. Usually this looks like an email.
+        ///- `/skype meeting` - opens Skype group conversation window with memebers of your channel.
+        /// </summary>
+        internal static string SkypeCommandUsage {
+            get {
+                return ResourceManager.GetString("SkypeCommandUsage", resourceCulture);
             }
         }
         

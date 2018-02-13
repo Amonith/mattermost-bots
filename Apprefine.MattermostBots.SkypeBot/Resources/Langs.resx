@@ -126,6 +126,11 @@
   <data name="SaveIdUsage" xml:space="preserve">
     <value>Usage: /skype id {YOUR_SKYPE_SID}</value>
   </data>
+  <data name="SkypeCommandUsage" xml:space="preserve">
+    <value>The following commands are available:
+- `/skype id YOUR_ID`  - saves your skype id. Usually this looks like an email.
+- `/skype meeting` - opens Skype group conversation window with memebers of your channel</value>
+  </data>
   <data name="SomeUsersDontHaveSids" xml:space="preserve">
     <value>Some users from your channel don't have Skype ID set up correctly. Encourage them to run: </value>
   </data>

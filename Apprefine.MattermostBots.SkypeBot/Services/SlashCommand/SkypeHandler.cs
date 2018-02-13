@@ -6,8 +6,8 @@ using Apprefine.MattermostBots.Common;
 using Apprefine.MattermostBots.Common.Consts;
 using Apprefine.MattermostBots.Common.Models;
 using Apprefine.MattermostBots.Common.Services;
+using Apprefine.MattermostBots.SkypeBot.Resources;
 using SkypeBot.Entities;
-using SkypeBot.Resources;
 
 namespace SkypeBot.Services.SlashCommand
 {
@@ -25,22 +25,19 @@ namespace SkypeBot.Services.SlashCommand
             _matermostSrv = mattermostSrv;
         }
 
-        public Task<MattermostResponse> Handle(MattermostRequest req)
+        public async Task<MattermostResponse> Handle(MattermostRequest req)
         {
-            if (string.IsNullOrWhiteSpace(req.text))
-                return null;
-
-            var command = req.text.Split(" ")[0].ToLower();
+            var command = req.text?.Split(" ")[0].ToLower();
             switch (command)
             {
                 case "id":
-                    return SaveId(req);
+                    return await SaveId(req);
 
                 case "meeting":
-                    return GenerateMeetingLink(req);
+                    return await GenerateMeetingLink(req);
 
                 default:
-                    return null;
+                    return PrintUsage(req);
             }
 
         }
@@ -58,19 +55,17 @@ namespace SkypeBot.Services.SlashCommand
             }
 
             var userInfo = _dbContext.UserInfos.SingleOrDefault(x => x.UserId == req.user_id);
-            if(userInfo == null)
+            if (userInfo != null)
             {
-                userInfo = new UserInfo()
-                {
-                    UserId = req.user_id,
-                    SkypeSID = skypeSid
-                };
-                _dbContext.Add(userInfo);
+                _dbContext.UserInfos.Remove(userInfo);
             }
-            else
+
+            userInfo = new UserInfo()
             {
-                userInfo.SkypeSID = skypeSid;
-            }
+                UserId = req.user_id,
+                SkypeSID = skypeSid
+            };
+            _dbContext.Add(userInfo);
 
             await _dbContext.SaveChangesAsync();
 
@@ -112,6 +107,15 @@ namespace SkypeBot.Services.SlashCommand
             }
 
             return response;
+        }
+
+        private MattermostResponse PrintUsage(MattermostRequest req)
+        {
+            return new MattermostResponse()
+            {
+                ResponseType = ResponseType.Ephemeral,
+                Text = Langs.SkypeCommandUsage
+            };
         }
     }
 }

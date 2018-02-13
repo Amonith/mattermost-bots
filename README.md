@@ -24,3 +24,8 @@ In the future the process will be simplified and the documentation expanded.
 The currently supported slash commands are:
 - `/skype id SKYPE_ID` - each user should run this to set their skype ids (e.g. `user@domain.example.com`)
 - `/skype meeting` - creates a Skype for Business group conversation with members of your channel
+
+## Development:
+
+I recommend using `mattermost-preview` official docker container during development.
+You can run the bot on your host machine and use your bridge network adapter's IP inside Mattermost to communicate with it.

@@ -79,6 +79,24 @@ namespace Apprefine.MattermostBots.SkypeBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to - `/skype join GROUP` - assignes you to a group. Not case sensitive..
+        /// </summary>
+        internal static string JoinGroupUsage {
+            get {
+                return ResourceManager.GetString("JoinGroupUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - `/skype leave GROUP` - removes you from a Skype group.
+        /// </summary>
+        internal static string LeaveGroupUsage {
+            get {
+                return ResourceManager.GetString("LeaveGroupUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Usage: /skype id {YOUR_SKYPE_SID}.
         /// </summary>
         internal static string SaveIdUsage {
@@ -88,9 +106,11 @@ namespace Apprefine.MattermostBots.SkypeBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following commands are available:
+        ///   Looks up a localized string similar to The following commands are available ([TEXT] denotes optional parameters):
         ///- `/skype id YOUR_ID`  - saves your skype id. Usually this looks like an email.
-        ///- `/skype meeting` - opens Skype group conversation window with memebers of your channel.
+        ///- `/skype meeting [GROUP]` - opens a Skype group conversation window with memebers of your channel. If GROUP is supplied the members are also filtered by Skype group (see commands belowe).
+        ///- `/skype join GROUP` - assignes you to a group. Not case sensitive.
+        ///- `/skype leave GROUP` - removes you from a Skype group.
         /// </summary>
         internal static string SkypeCommandUsage {
             get {
@@ -104,6 +124,24 @@ namespace Apprefine.MattermostBots.SkypeBot.Resources {
         internal static string SomeUsersDontHaveSids {
             get {
                 return ResourceManager.GetString("SomeUsersDontHaveSids", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} has joined Skype group &quot;{1}&quot;..
+        /// </summary>
+        internal static string UserJoinedGroup {
+            get {
+                return ResourceManager.GetString("UserJoinedGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} has left Skype group &quot;{1}&quot;/.
+        /// </summary>
+        internal static string UserLeftGroup {
+            get {
+                return ResourceManager.GetString("UserLeftGroup", resourceCulture);
             }
         }
         

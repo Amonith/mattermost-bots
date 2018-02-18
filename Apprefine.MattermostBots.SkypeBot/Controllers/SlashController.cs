@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using SkypeBot.Services;
 using Microsoft.AspNetCore.Mvc;
 using Apprefine.MattermostBots.Common.Models;
+using Apprefine.MattermostBots.Common.Services;
 
 namespace SkypeBot.Controllers
 {

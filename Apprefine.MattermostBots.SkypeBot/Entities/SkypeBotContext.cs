@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Apprefine.MattermostBots.SkypeBot.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace SkypeBot.Entities
     public class SkypeBotContext : DbContext
     {
         public DbSet<UserInfo> UserInfos { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<UserGroup> UserGroups { get; set; }
 
         public SkypeBotContext()
         {
@@ -27,6 +30,9 @@ namespace SkypeBot.Entities
 
             modelBuilder.Entity<UserInfo>()
                 .HasKey(x => new { x.UserId, x.SkypeSID });
+
+            modelBuilder.Entity<UserGroup>()
+                .HasKey(x => new { x.GroupId, x.UserId });
         }
     }
 }

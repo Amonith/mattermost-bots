@@ -123,16 +123,30 @@
   <data name="IdSaved" xml:space="preserve">
     <value>Your Skype id has been saved. Thanks. :+1:</value>
   </data>
+  <data name="JoinGroupUsage" xml:space="preserve">
+    <value>- `/skype join GROUP` - assignes you to a group. Not case sensitive.</value>
+  </data>
+  <data name="LeaveGroupUsage" xml:space="preserve">
+    <value>- `/skype leave GROUP` - removes you from a Skype group</value>
+  </data>
   <data name="SaveIdUsage" xml:space="preserve">
     <value>Usage: /skype id {YOUR_SKYPE_SID}</value>
   </data>
   <data name="SkypeCommandUsage" xml:space="preserve">
-    <value>The following commands are available:
+    <value>The following commands are available ([TEXT] denotes optional parameters):
 - `/skype id YOUR_ID`  - saves your skype id. Usually this looks like an email.
-- `/skype meeting` - opens Skype group conversation window with memebers of your channel</value>
+- `/skype meeting [GROUP]` - opens a Skype group conversation window with memebers of your channel. If GROUP is supplied the members are also filtered by Skype group (see commands belowe).
+- `/skype join GROUP` - assignes you to a group. Not case sensitive.
+- `/skype leave GROUP` - removes you from a Skype group</value>
   </data>
   <data name="SomeUsersDontHaveSids" xml:space="preserve">
     <value>Some users from your channel don't have Skype ID set up correctly. Encourage them to run: </value>
+  </data>
+  <data name="UserJoinedGroup" xml:space="preserve">
+    <value>User {0} has joined Skype group "{1}".</value>
+  </data>
+  <data name="UserLeftGroup" xml:space="preserve">
+    <value>User {0} has left Skype group "{1}"/</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

@@ -10,6 +10,7 @@ namespace Apprefine.MattermostBots.PollBot.Entities
     {
         public int PollId { get; set; }
         public string UserId { get; set; }
+        public string UserName { get; set; }
 
         [MaxLength(4000)]
         public string Answer { get; set; }

@@ -11,6 +11,7 @@ namespace Apprefine.MattermostBots.PollBot.Entities
     {
         public int Id { get; set; }
         public PollType Type { get; set; }
+        public string Description { get; set; }
         public string OwnerId { get; set; }
         public string ChannelId { get; set; }
 

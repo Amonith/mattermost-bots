@@ -1,5 +1,8 @@
-﻿using Apprefine.MattermostBots.Common.Models;
+﻿using Apprefine.MattermostBots.Common.Helpers;
+using Apprefine.MattermostBots.Common.Models;
 using Apprefine.MattermostBots.PollBot.Entities;
+using Apprefine.MattermostBots.PollBot.Resources;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,31 +34,243 @@ namespace Apprefine.MattermostBots.PollBot.Services
             //-extract poll type from text
             //open looks like this: "open DESCRIPTION" where DESCRIPTION is anything
             //closed looks like this: "closed ANSWERS DESCRIPTION" when answers is semicolon separated list of answers
+
+            var cmdParams = req.text.Split(" ").Select(x => x.Trim()).ToList();
+            if(cmdParams.Count < 2)
+            {
+                return Task.FromResult(new MattermostResponse()
+                {
+                    ResponseType = Common.Consts.ResponseType.Ephemeral,
+                    Text = Langs.NewPollUsage
+                });
+            }
+
+            var type = cmdParams[1].ToLower();
+            if (type.StartsWith("o"))
+                return HandleNewOpenPoll(req, cmdParams);
+            else if (type.StartsWith("c"))
+                return HandleNewClosedPoll(req, cmdParams);
+            else
+                return Task.FromResult(new MattermostResponse()
+                {
+                    ResponseType = Common.Consts.ResponseType.Ephemeral,
+                    Text = Langs.NewPollUsage
+                });
+        }
+         
+        private async Task<MattermostResponse> HandleNewOpenPoll(MattermostRequest req, List<string> cmdParams)
+        {
+            if (cmdParams.Count < 3)
+                return new MattermostResponse()
+                {
+                    ResponseType = Common.Consts.ResponseType.Ephemeral,
+                    Text = Langs.NewOpenPollUsage
+                };
+
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                if (_dbContext.Polls.Any(p => p.ChannelId == req.channel_id && p.IsActive))
+                    return new MattermostResponse()
+                    {
+                        ResponseType = Common.Consts.ResponseType.Ephemeral,
+                        Text = Langs.ActiveOpenPollExists
+                    };
+
+                var poll = new Poll()
+                {
+                    ChannelId = req.channel_id,
+                    CreatedAtUtc = DateTime.UtcNow,
+                    IsActive = true,
+                    OwnerId = req.user_id,
+                    Type = Consts.PollType.Open
+                };
+
+                _dbContext.Polls.Add(poll);
+                await _dbContext.SaveChangesAsync();
+                transaction.Commit();
+
+                return new MattermostResponse()
+                {
+                    ResponseType = Common.Consts.ResponseType.InChannel,
+                    Text = string.Format(
+                        Langs.OpenPollCreated,
+                        req.user_name,
+                        poll.Description,
+                        poll.Id
+                    )
+                };
+            }
+        }
+
+        private Task<MattermostResponse> HandleNewClosedPoll(MattermostRequest req, List<string> cmdParams)
+        {
             throw new NotImplementedException();
         }
 
-        private Task<MattermostResponse> HandlePollAnswer(MattermostRequest req)
+        private async Task<MattermostResponse> HandlePollAnswer(MattermostRequest req)
         {
-            //TODO:
+            var cmdParams = req.text.Split(" ").Select(x => x.Trim()).ToList();
+            if (cmdParams.Count < 2)
+            {
+                return new MattermostResponse()
+                {
+                    ResponseType = Common.Consts.ResponseType.Ephemeral,
+                    Text = Langs.AnswerUsage
+                };
+            }
+
             //-find an active poll on current channel
             //-add or update user answer
-            throw new NotImplementedException();
+
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                var poll = _dbContext.Polls.SingleOrDefault(
+                    x => x.ChannelId == req.channel_id && x.IsActive
+                );
+
+                if (poll == null)
+                    return new MattermostResponse()
+                    {
+                        ResponseType = Common.Consts.ResponseType.Ephemeral,
+                        Text = Langs.NoActivePolls
+                    };
+
+                var answer = _dbContext.PollAnswers.SingleOrDefault(
+                    x => x.UserId == req.user_id
+                    && x.PollId == poll.Id
+                );
+                if(answer != null)
+                {
+                    _dbContext.Remove(answer);
+                }
+
+                answer = new PollAnswer()
+                {
+                    UserId = req.user_id,
+                    UserName = req.user_name,
+                    PollId = poll.Id,
+                    //everything except "answer" - first param
+                    Answer = req.text.Substring(
+                        req.text.IndexOf(cmdParams[0]) + cmdParams[0].Length + 1
+                    )
+                };
+
+                _dbContext.PollAnswers.Add(answer);
+                await _dbContext.SaveChangesAsync();
+                transaction.Commit();
+
+                return new MattermostResponse()
+                {
+                    ResponseType = Common.Consts.ResponseType.Ephemeral,
+                    Text = string.Format(Langs.AnswerUpdated, poll.Id)
+                };
+            }
         }
 
-        private Task<MattermostResponse> HandlePollClose(MattermostRequest req)
+        private async Task<MattermostResponse> HandlePollClose(MattermostRequest req)
         {
-            //TODO:
             //-if there is an active poll on current channel with OwnerId == req.UserId
             //then close it
             //else notify the user that he's retarded
-            throw new NotImplementedException();
+
+            var poll = _dbContext.Polls.SingleOrDefault(x => x.OwnerId == req.user_id && x.IsActive);
+            if(poll == null)
+            {
+                return new MattermostResponse()
+                {
+                    ResponseType = Common.Consts.ResponseType.Ephemeral,
+                    Text = Langs.NoActivePollsByYou
+                };
+            }
+            else
+            {
+                poll.IsActive = false;
+                await _dbContext.SaveChangesAsync();
+
+                return new MattermostResponse()
+                {
+                    ResponseType = Common.Consts.ResponseType.InChannel,
+                    Text = string.Format(
+                        Langs.OpenPollClosed,
+                        req.user_name,
+                        poll.Id
+                    )
+                };
+            }
         }
 
-        private Task<MattermostResponse> HandlePollResults(MattermostRequest req)
+
+        /// <summary>
+        /// /poll results [ID]
+        /// </summary>
+        private async Task<MattermostResponse> HandlePollResults(MattermostRequest req)
         {
-            //TODO
-            //-send last (active or not) poll results as an InChannel message
-            throw new NotImplementedException();
+            //-send poll results as an ephemeral message
+
+            var cmdParams = req.text.Split(" ").Select(x => x.Trim()).ToList();
+            int pollId = 0;
+            if (cmdParams.Count > 1)
+            {
+                //get specific poll answers
+                var pollIdParam = cmdParams[1];
+                if (!int.TryParse(pollIdParam, out pollId))
+                {
+                    return new MattermostResponse()
+                    {
+                        ResponseType = Common.Consts.ResponseType.Ephemeral,
+                        Text = Langs.ResultsUsage
+                    };
+                }
+            }
+            else
+            {
+                //get latest poll answers
+                var latestPoll = await _dbContext.Polls
+                    .Where(x => x.ChannelId == req.channel_id)
+                    .OrderByDescending(x => x.CreatedAtUtc)
+                    .FirstOrDefaultAsync();
+
+                if(latestPoll == null)
+                    return new MattermostResponse()
+                    {
+                        ResponseType = Common.Consts.ResponseType.Ephemeral,
+                        Text = Langs.ResultsUsage
+                    };
+
+                pollId = latestPoll.Id;
+            }
+
+            var answers = await (
+                from poll in _dbContext.Polls
+                where poll.ChannelId == req.channel_id && poll.Id == pollId
+                from pollAnswer in _dbContext.PollAnswers.Where(x => x.PollId == poll.Id).DefaultIfEmpty()
+                select pollAnswer
+            ).ToListAsync();
+
+            if(answers.Any())
+            {
+                var table = new TableBuilder();
+                foreach (var answer in answers)
+                {
+                    table
+                        .AddColumn("User", answer.UserName)
+                        .AddColumn("Answer", answer.Answer);
+                }
+
+                return new MattermostResponse()
+                {
+                    ResponseType = Common.Consts.ResponseType.InChannel,
+                    Text = table.ToString()
+                };
+            }
+            else
+            {
+                return new MattermostResponse()
+                {
+                    ResponseType = Common.Consts.ResponseType.Ephemeral,
+                    Text = Langs.NoAnswersFound
+                };
+            }
         }
 
         private Task<MattermostResponse> PrintUsage(MattermostRequest req)
@@ -63,7 +278,7 @@ namespace Apprefine.MattermostBots.PollBot.Services
             return Task.FromResult(new MattermostResponse()
             {
                 ResponseType = Common.Consts.ResponseType.Ephemeral,
-                Text = "TODO"
+                Text = Langs.Usage
             });
         }
     }

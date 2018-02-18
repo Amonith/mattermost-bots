@@ -12,9 +12,10 @@ using System;
 namespace Apprefine.MattermostBots.PollBot.Migrations
 {
     [DbContext(typeof(PollBotContext))]
-    partial class PollBotContextModelSnapshot : ModelSnapshot
+    [Migration("20180218185712_MoreColumns")]
+    partial class MoreColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

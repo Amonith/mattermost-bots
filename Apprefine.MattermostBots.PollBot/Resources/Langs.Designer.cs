@@ -172,11 +172,21 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Usage (brackets denote optional parameters):
         ///- `/poll answer YOUR ANSWER`. This will only work if there&apos;s an open poll in the channel. You can create new polls with `/poll new`.
         ///- `/poll new open DESCRIPTION` - creates a new open poll. &quot;Open&quot; means that users can give text answers.
         ///- `/poll new closed ANSWERS DESCRIPTION` - NOT IMPLEMENTED
-        ///- `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest..
+        ///- `/poll close` - closes your active poll. Nobody will be able to add more answers.
+        ///- `/poll results [ID]` - displays results of a poll. If ID is supplied - a specif [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Usage {
             get {

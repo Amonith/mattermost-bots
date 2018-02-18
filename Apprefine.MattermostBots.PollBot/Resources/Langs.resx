@@ -159,11 +159,15 @@
     <value>Usage (brackets denote optional parameters):
 - `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest.</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Usage" xml:space="preserve">
     <value>Usage (brackets denote optional parameters):
 - `/poll answer YOUR ANSWER`. This will only work if there's an open poll in the channel. You can create new polls with `/poll new`.
 - `/poll new open DESCRIPTION` - creates a new open poll. "Open" means that users can give text answers.
 - `/poll new closed ANSWERS DESCRIPTION` - NOT IMPLEMENTED
+- `/poll close` - closes your active poll. Nobody will be able to add more answers.
 - `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest.</value>
   </data>
 </root>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Apprefine.MattermostBots.Common.Models;
 using Apprefine.MattermostBots.Common.Services;
 using Apprefine.MattermostBots.PollBot.Entities;
+using Apprefine.MattermostBots.PollBot.Filters;
 using Apprefine.MattermostBots.PollBot.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +32,11 @@ namespace Apprefine.MattermostBots.PollBot
             //common for all bots
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.Configure<MattermostOptions>(Configuration.GetSection("Mattermost"));
-            services.AddMvc();
+            services.AddMvc(
+                config => {
+                    config.Filters.Add(typeof(ExceptionFilter));
+                }
+            );
             services.AddDbContext<PollBotContext>(options =>
                 options.UseNpgsql(connectionString)
             );

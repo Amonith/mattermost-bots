@@ -180,7 +180,7 @@ namespace Apprefine.MattermostBots.PollBot.Services
             //then close it
             //else notify the user that he's retarded
 
-            var poll = _dbContext.Polls.SingleOrDefault(x => x.OwnerId == req.user_id && x.IsActive);
+            var poll = _dbContext.Polls.SingleOrDefault(x => x.OwnerId == req.user_id && x.ChannelId == req.channel_id && x.IsActive);
             if(poll == null)
             {
                 return new MattermostResponse()

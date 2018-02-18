@@ -26,7 +26,7 @@ namespace SkypeBot.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.HasDefaultSchema("skype");
 
             modelBuilder.Entity<UserInfo>()
                 .HasKey(x => new { x.UserId, x.SkypeSID });

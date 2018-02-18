@@ -24,7 +24,7 @@ namespace Apprefine.MattermostBots.PollBot.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.HasDefaultSchema("poll");
 
             modelBuilder.Entity<PollAnswer>()
                 .HasKey(x => new { x.PollId, x.UserId });

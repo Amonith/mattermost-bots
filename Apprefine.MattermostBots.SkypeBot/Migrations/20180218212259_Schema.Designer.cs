@@ -11,9 +11,10 @@ using System;
 namespace SkypeBot.Migrations
 {
     [DbContext(typeof(SkypeBotContext))]
-    partial class SkypeBotContextModelSnapshot : ModelSnapshot
+    [Migration("20180218212259_Schema")]
+    partial class Schema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

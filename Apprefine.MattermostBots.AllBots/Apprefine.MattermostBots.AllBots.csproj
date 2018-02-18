@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Apprefine.MattermostBots.Common\Apprefine.MattermostBots.Common.csproj" />
+    <ProjectReference Include="..\Apprefine.MattermostBots.PollBot\Apprefine.MattermostBots.PollBot.csproj" />
+    <ProjectReference Include="..\Apprefine.MattermostBots.SkypeBot\Apprefine.MattermostBots.SkypeBot.csproj" />
+  </ItemGroup>
+
+</Project>

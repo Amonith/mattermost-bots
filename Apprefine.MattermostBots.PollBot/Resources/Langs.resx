@@ -121,39 +121,49 @@
     <value>Only one open poll can be active per channel for answering simplicity. You can have many closed polls if you want.</value>
   </data>
   <data name="AnswerUpdated" xml:space="preserve">
-    <value />
+    <value>Your answer in poll {0} has been updated. Thx :+1:</value>
     <comment>{0} - poll id</comment>
   </data>
   <data name="AnswerUsage" xml:space="preserve">
-    <value />
+    <value>Usage: `/poll answer YOUR ANSWER`. This will only work if there's an open poll in the channel. You can create new polls with `/poll new`.</value>
   </data>
   <data name="NewOpenPollUsage" xml:space="preserve">
-    <value />
+    <value>Usage: `/poll new open DESCRIPTION` - creates a new open poll. "Open" means that users can give text answers.</value>
   </data>
   <data name="NewPollUsage" xml:space="preserve">
-    <value />
+    <value>Usage:
+- `/poll new open DESCRIPTION` - creates a new open poll. "Open" means that users can give text answers.
+- `/poll new closed ANSWERS DESCRIPTION` - NOT IMPLEMENTED</value>
   </data>
   <data name="NoActivePolls" xml:space="preserve">
-    <value />
+    <value>There are no active open polls in the channel.</value>
   </data>
   <data name="NoActivePollsByYou" xml:space="preserve">
-    <value />
+    <value>There are no active open polls which you own in the channel.</value>
   </data>
   <data name="NoAnswersFound" xml:space="preserve">
-    <value />
+    <value>No answers found or there's no such poll in this channel.</value>
+  </data>
+  <data name="NotImplemented" xml:space="preserve">
+    <value>Not implemented yet, stay tuned :)</value>
   </data>
   <data name="OpenPollClosed" xml:space="preserve">
-    <value />
+    <value>User {0} has closed the poll {1}. Everyone can display results with `/poll results`.</value>
     <comment>{0} - user name, {1} - poll id</comment>
   </data>
   <data name="OpenPollCreated" xml:space="preserve">
-    <value />
+    <value>User {0} has created a poll "{1}". The ID is {2}.</value>
     <comment>{0} - user name, {1} - poll description, {2} - poll id</comment>
   </data>
   <data name="ResultsUsage" xml:space="preserve">
-    <value />
+    <value>Usage (brackets denote optional parameters):
+- `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest.</value>
   </data>
   <data name="Usage" xml:space="preserve">
-    <value />
+    <value>Usage (brackets denote optional parameters):
+- `/poll answer YOUR ANSWER`. This will only work if there's an open poll in the channel. You can create new polls with `/poll new`.
+- `/poll new open DESCRIPTION` - creates a new open poll. "Open" means that users can give text answers.
+- `/poll new closed ANSWERS DESCRIPTION` - NOT IMPLEMENTED
+- `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest.</value>
   </data>
 </root>

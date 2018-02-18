@@ -70,7 +70,7 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Your answer in poll {0} has been updated. Thx :+1:.
         /// </summary>
         internal static string AnswerUpdated {
             get {
@@ -79,7 +79,7 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Usage: `/poll answer YOUR ANSWER`. This will only work if there&apos;s an open poll in the channel. You can create new polls with `/poll new`..
         /// </summary>
         internal static string AnswerUsage {
             get {
@@ -88,7 +88,7 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Usage: `/poll new open DESCRIPTION` - creates a new open poll. &quot;Open&quot; means that users can give text answers..
         /// </summary>
         internal static string NewOpenPollUsage {
             get {
@@ -97,7 +97,9 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Usage:
+        ///- `/poll new open DESCRIPTION` - creates a new open poll. &quot;Open&quot; means that users can give text answers.
+        ///- `/poll new closed ANSWERS DESCRIPTION` - NOT IMPLEMENTED.
         /// </summary>
         internal static string NewPollUsage {
             get {
@@ -106,7 +108,7 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to There are no active open polls in the channel..
         /// </summary>
         internal static string NoActivePolls {
             get {
@@ -115,7 +117,7 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to There are no active open polls which you own in the channel..
         /// </summary>
         internal static string NoActivePollsByYou {
             get {
@@ -124,7 +126,7 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to No answers found or there&apos;s no such poll in this channel..
         /// </summary>
         internal static string NoAnswersFound {
             get {
@@ -133,7 +135,16 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Not implemented yet, stay tuned :).
+        /// </summary>
+        internal static string NotImplemented {
+            get {
+                return ResourceManager.GetString("NotImplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} has closed the poll {1}. Everyone can display results with `/poll results`..
         /// </summary>
         internal static string OpenPollClosed {
             get {
@@ -142,7 +153,7 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to User {0} has created a poll &quot;{1}&quot;. The ID is {2}..
         /// </summary>
         internal static string OpenPollCreated {
             get {
@@ -151,7 +162,8 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Usage (brackets denote optional parameters):
+        ///- `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest..
         /// </summary>
         internal static string ResultsUsage {
             get {
@@ -160,7 +172,11 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Usage (brackets denote optional parameters):
+        ///- `/poll answer YOUR ANSWER`. This will only work if there&apos;s an open poll in the channel. You can create new polls with `/poll new`.
+        ///- `/poll new open DESCRIPTION` - creates a new open poll. &quot;Open&quot; means that users can give text answers.
+        ///- `/poll new closed ANSWERS DESCRIPTION` - NOT IMPLEMENTED
+        ///- `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest..
         /// </summary>
         internal static string Usage {
             get {

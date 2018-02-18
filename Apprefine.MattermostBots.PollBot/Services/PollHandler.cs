@@ -82,7 +82,10 @@ namespace Apprefine.MattermostBots.PollBot.Services
                     CreatedAtUtc = DateTime.UtcNow,
                     IsActive = true,
                     OwnerId = req.user_id,
-                    Type = Consts.PollType.Open
+                    Type = Consts.PollType.Open,
+                    Description = req.text.Substring(
+                        req.text.IndexOf(cmdParams[1]) + cmdParams[1].Length + 1
+                    )
                 };
 
                 _dbContext.Polls.Add(poll);
@@ -104,7 +107,11 @@ namespace Apprefine.MattermostBots.PollBot.Services
 
         private Task<MattermostResponse> HandleNewClosedPoll(MattermostRequest req, List<string> cmdParams)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new MattermostResponse()
+            {
+                ResponseType = Common.Consts.ResponseType.Ephemeral,
+                Text = Langs.NotImplemented
+            });
         }
 
         private async Task<MattermostResponse> HandlePollAnswer(MattermostRequest req)
@@ -259,7 +266,7 @@ namespace Apprefine.MattermostBots.PollBot.Services
 
                 return new MattermostResponse()
                 {
-                    ResponseType = Common.Consts.ResponseType.InChannel,
+                    ResponseType = Common.Consts.ResponseType.Ephemeral,
                     Text = table.ToString()
                 };
             }

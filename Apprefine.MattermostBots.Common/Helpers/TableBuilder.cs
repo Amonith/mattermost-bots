@@ -51,7 +51,7 @@ namespace Apprefine.MattermostBots.Common.Helpers
                 foreach(var col in _columns.Values)
                 {
                     //some columns can be shorter
-                    if(col.Count -1 <= row) 
+                    if(row <= col.Count - 1) 
                     {
                         str.Append(col[row]);
                     }

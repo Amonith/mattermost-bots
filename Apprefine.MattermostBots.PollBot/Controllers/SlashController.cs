@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Apprefine.MattermostBots.Common.Models;
+using Apprefine.MattermostBots.Common.Services;
 using Apprefine.MattermostBots.PollBot.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,18 +15,18 @@ namespace Apprefine.MattermostBots.PollBot.Controllers
     [Route("api/slash")]
     public class SlashController : Controller
     {
-        private readonly PollSrv _pollSrv;
+        private readonly SlashCommandSrv _commandSrv;
 
-        public SlashController(PollSrv pollSrv)
+        public SlashController(SlashCommandSrv commandSrv)
         {
-            _pollSrv = pollSrv;
+            _commandSrv = commandSrv;
         }
 
         [HttpPost]
         [Route("")]
         public Task<MattermostResponse> HandleMessage([FromForm]MattermostRequest req)
         {
-            return _pollSrv.HandleCommand(req);
+            return _commandSrv.Handle(req);
         }
     }
 }

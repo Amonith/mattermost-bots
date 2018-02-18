@@ -28,18 +28,29 @@ namespace Apprefine.MattermostBots.PollBot
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //common for all bots
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
             services.Configure<MattermostOptions>(Configuration.GetSection("Mattermost"));
-
             services.AddMvc();
-
             services.AddDbContext<PollBotContext>(options =>
                 options.UseNpgsql(connectionString)
             );
-
             services.AddTransient<MattermostSrv>();
-            services.AddTransient<PollSrv>();
+            services.AddTransient<SlashCommandSrv>(
+                provider => new SlashCommandSrv(provider.GetServices<CommandHandlerFactory>())
+            );
+
+            //register command handlers
+            services.AddTransient<PollHandler>();
+
+            //register handler factories
+            services.AddTransient<CommandHandlerFactory>(
+                provider => new CommandHandlerFactory()
+                {
+                    Command = "/poll",
+                    Factory = () => provider.GetService<PollHandler>()
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,30 +7,22 @@ using System.Threading.Tasks;
 
 namespace Apprefine.MattermostBots.PollBot.Services
 {
-    public class PollSrv
+    public class PollHandler : CommandHandler
     {
         private readonly PollBotContext _dbContext;
 
-        public PollSrv(PollBotContext dbContext)
+        public PollHandler(
+            PollBotContext dbContext
+        )
+        : base("/skype")
         {
             _dbContext = dbContext;
-        }
 
-        public async Task<MattermostResponse> HandleCommand(MattermostRequest req)
-        {
-            switch(req.command)
-            {
-                case "/poll_new":
-                    return await HandleNewPoll(req);
-                case "/poll_answer":
-                    return await HandlePollAnswer(req);
-                case "/poll_close":
-                    return await HandlePollClose(req);
-                case "/poll_results":
-                    return await HandlePollResults(req);
-                default:
-                    return PrintUsage(req);
-            }
+            Register("new", HandleNewPoll);
+            Register("answer", HandlePollAnswer);
+            Register("close", HandlePollClose);
+            Register("results", HandlePollResults);
+            Register("", PrintUsage);
         }
 
         private Task<MattermostResponse> HandleNewPoll(MattermostRequest req)
@@ -66,13 +58,13 @@ namespace Apprefine.MattermostBots.PollBot.Services
             throw new NotImplementedException();
         }
 
-        private MattermostResponse PrintUsage(MattermostRequest req)
+        private Task<MattermostResponse> PrintUsage(MattermostRequest req)
         {
-            return new MattermostResponse()
+            return Task.FromResult(new MattermostResponse()
             {
                 ResponseType = Common.Consts.ResponseType.Ephemeral,
                 Text = "TODO"
-            };
+            });
         }
     }
 }

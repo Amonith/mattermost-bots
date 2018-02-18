@@ -18,9 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Apprefine.MattermostBots.Common\Apprefine.MattermostBots.Common.csproj" />
-    <ProjectReference Include="..\Apprefine.MattermostBots.PollBot\Apprefine.MattermostBots.PollBot.csproj" />
-    <ProjectReference Include="..\Apprefine.MattermostBots.RandomBot\Apprefine.MattermostBots.RandomBot.csproj" />
-    <ProjectReference Include="..\Apprefine.MattermostBots.SkypeBot\Apprefine.MattermostBots.SkypeBot.csproj" />
   </ItemGroup>
 
 </Project>

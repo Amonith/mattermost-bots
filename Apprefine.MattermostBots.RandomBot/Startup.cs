@@ -28,6 +28,7 @@ namespace Apprefine.MattermostBots.RandomBot
         {
             //common for all bots
             services.Configure<MattermostOptions>(Configuration.GetSection("Mattermost"));
+            services.AddMvc();
             services.AddTransient<MattermostSrv>();
             services.AddTransient<SlashCommandSrv>(
                 provider => new SlashCommandSrv(provider.GetServices<CommandHandlerFactory>())

@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apprefine.MattermostBots.Al
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apprefine.MattermostBots.RandomBot", "Apprefine.MattermostBots.RandomBot\Apprefine.MattermostBots.RandomBot.csproj", "{096EDE6E-EFB1-4804-9D39-5642F44970C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apprefine.MattermostBots.ReminderBot", "Apprefine.MattermostBots.ReminderBot\Apprefine.MattermostBots.ReminderBot.csproj", "{B43DBAE1-E230-4F84-8CE1-7689B9357433}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{096EDE6E-EFB1-4804-9D39-5642F44970C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{096EDE6E-EFB1-4804-9D39-5642F44970C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{096EDE6E-EFB1-4804-9D39-5642F44970C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B43DBAE1-E230-4F84-8CE1-7689B9357433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B43DBAE1-E230-4F84-8CE1-7689B9357433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B43DBAE1-E230-4F84-8CE1-7689B9357433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B43DBAE1-E230-4F84-8CE1-7689B9357433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -95,13 +95,13 @@ namespace SkypeBot.Services
 
             string meetingUrl = "im:" + string.Join(
                 "",
-                sids.Select(sid => $"&lt;sip:{sid}&gt;")
+                sids.Select(sid => $"<sip:{sid}>")
             );
 
             var response = new MattermostResponse()
             {
                 ResponseType = ResponseType.Ephemeral,
-                Text = $"[{Langs.ClickHereToStartMeeting}]({meetingUrl})",
+                Text = $"[{Langs.ClickHereToStartMeeting}]({meetingUrl.Replace("<", "&lt;").Replace(">", "&gt;")})",
                 GotoLocation = meetingUrl
             };
 

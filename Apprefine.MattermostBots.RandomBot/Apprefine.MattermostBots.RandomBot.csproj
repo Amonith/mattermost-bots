@@ -20,4 +20,19 @@
     <ProjectReference Include="..\Apprefine.MattermostBots.Common\Apprefine.MattermostBots.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\Langs.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Langs.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Langs.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Langs.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

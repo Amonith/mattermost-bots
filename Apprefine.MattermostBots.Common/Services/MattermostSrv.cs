@@ -35,5 +35,23 @@ namespace Apprefine.MattermostBots.Common.Services
                 );
             }
         }
+
+        public async Task<User> GetUser(string userId)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_options.Value.ApiUrl);
+                client.DefaultRequestHeaders.Authorization
+                    = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _options.Value.Token);
+
+                var response = await client.GetAsync($"api/v4/users/{userId}");
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception($"Could not user {userId}. Ensure that correct API token is set in bot's config.");
+
+                return JsonConvert.DeserializeObject<User>(
+                    await response.Content.ReadAsStringAsync()
+                );
+            }
+        }
     }
 }

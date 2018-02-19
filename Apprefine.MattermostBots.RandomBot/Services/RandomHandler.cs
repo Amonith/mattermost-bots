@@ -74,7 +74,7 @@ namespace Apprefine.MattermostBots.RandomBot.Services
                         Langs.RandomNumberSelected,
                         req.user_name,
                         randomFrom,
-                        randomTo,
+                        match.Groups[2].Value,
                         random
                     )
                 }

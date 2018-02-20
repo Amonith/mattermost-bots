@@ -120,6 +120,9 @@
   <data name="ClickHereToStartMeeting" xml:space="preserve">
     <value>Click here to start a meeting</value>
   </data>
+  <data name="IdAlreadySaved" xml:space="preserve">
+    <value>You already saved this id. This is shared between channels, you should do this only once.</value>
+  </data>
   <data name="IdSaved" xml:space="preserve">
     <value>Your Skype id has been saved. Thanks. :+1:</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="LeaveGroupUsage" xml:space="preserve">
     <value>- `/skype leave GROUP` - removes you from a Skype group</value>
+  </data>
+  <data name="NoSidsInChannel" xml:space="preserve">
+    <value>Either you are the only one with Skype ID set up correctly or nobody has it. Encourage everybody to run `/skype id SKYPE_ID`.</value>
   </data>
   <data name="SaveIdUsage" xml:space="preserve">
     <value>Usage: /skype id {YOUR_SKYPE_SID}</value>

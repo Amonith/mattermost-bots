@@ -52,13 +52,21 @@ namespace Apprefine.MattermostBots.Common.Models
                     //one command starting with j - "join" then exeute it right away
                     return await _subCommandHandlers[similarCommands[0]](request);
                 }
-                else
+                else if(similarCommands.Count > 1)
                 {
                     return new MattermostResponse()
                     {
                         ResponseType = Consts.ResponseType.Ephemeral,
                         Text = "Multiple commands found:\n"
                             + string.Join("\n", similarCommands.Select(c => "- " + request.command + " " + c))
+                    };
+                }
+                else
+                {
+                    return new MattermostResponse()
+                    {
+                        ResponseType = Consts.ResponseType.Ephemeral,
+                        Text = $"No such command found. Run `{request.command}` for usage info."
                     };
                 }
             }

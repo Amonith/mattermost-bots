@@ -70,6 +70,15 @@ namespace Apprefine.MattermostBots.SkypeBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You already saved this id. This is shared between channels, you should do this only once..
+        /// </summary>
+        internal static string IdAlreadySaved {
+            get {
+                return ResourceManager.GetString("IdAlreadySaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your Skype id has been saved. Thanks. :+1:.
         /// </summary>
         internal static string IdSaved {
@@ -93,6 +102,15 @@ namespace Apprefine.MattermostBots.SkypeBot.Resources {
         internal static string LeaveGroupUsage {
             get {
                 return ResourceManager.GetString("LeaveGroupUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Either you are the only one with Skype ID set up correctly or nobody has it. Encourage everybody to run `/skype id SKYPE_ID`..
+        /// </summary>
+        internal static string NoSidsInChannel {
+            get {
+                return ResourceManager.GetString("NoSidsInChannel", resourceCulture);
             }
         }
         

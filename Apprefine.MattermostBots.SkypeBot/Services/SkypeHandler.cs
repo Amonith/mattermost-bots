@@ -47,6 +47,15 @@ namespace SkypeBot.Services
             var userInfo = _dbContext.UserInfos.SingleOrDefault(x => x.UserId == req.user_id);
             if (userInfo != null)
             {
+                if(userInfo.SkypeSID == skypeSid)
+                {
+                    return new MattermostResponse()
+                    {
+                        ResponseType = ResponseType.Ephemeral,
+                        Text = Langs.IdAlreadySaved
+                    };
+                }
+
                 _dbContext.UserInfos.Remove(userInfo);
             }
 
@@ -92,6 +101,15 @@ namespace SkypeBot.Services
 
             var sids = userInfoQuery
                 .Select(x => x.SkypeSID);
+
+            if(!sids.Any())
+            {
+                return new MattermostResponse()
+                {
+                    ResponseType = ResponseType.Ephemeral,
+                    Text = Langs.NoSidsInChannel
+                };
+            }
 
             string meetingUrl = "im:" + string.Join(
                 "",

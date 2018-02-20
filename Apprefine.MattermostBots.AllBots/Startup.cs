@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SkypeBot.Entities;
 using SkypeBot.Services;
+using Apprefine.MattermostBots.AllBots.Extensions;
 
 namespace Apprefine.MattermostBots.AllBots
 {
@@ -33,7 +34,6 @@ namespace Apprefine.MattermostBots.AllBots
         public void ConfigureServices(IServiceCollection services)
         {
             //common for all bots
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.Configure<MattermostOptions>(Configuration.GetSection("Mattermost"));
             services.AddMvc(
                 config => {
@@ -46,40 +46,20 @@ namespace Apprefine.MattermostBots.AllBots
             );
 
             //register dbcontexts
+            string pollBotConnection = Configuration.GetConnectionString("PollBot");
             services.AddDbContext<PollBotContext>(options =>
-                options.UseNpgsql(connectionString)
+                options.UseNpgsql(pollBotConnection)
             );
+
+            string skypeBotConnection = Configuration.GetConnectionString("SkypeBot");
             services.AddDbContext<SkypeBotContext>(options =>
-                options.UseNpgsql(connectionString)
+                options.UseNpgsql(skypeBotConnection)
             );
 
             //register command handlers
-            services.AddTransient<SkypeHandler>();
-            services.AddTransient<PollHandler>();
-            services.AddTransient<RandomHandler>();
-
-            //register handler factories
-            services.AddTransient<CommandHandlerFactory>(
-                provider => new CommandHandlerFactory()
-                {
-                    Command = "/poll",
-                    Factory = () => provider.GetService<PollHandler>()
-                }
-            );
-            services.AddTransient<CommandHandlerFactory>(
-                provider => new CommandHandlerFactory()
-                {
-                    Command = "/skype",
-                    Factory = () => provider.GetService<SkypeHandler>()
-                }
-            );
-            services.AddTransient<CommandHandlerFactory>(
-                provider => new CommandHandlerFactory()
-                {
-                    Command = "/random",
-                    Factory = () => provider.GetService<RandomHandler>()
-                }
-            );
+            services.AddSlashCommand<SkypeHandler>("/skype");
+            services.AddSlashCommand<PollHandler>("/poll");
+            services.AddSlashCommand<RandomHandler>("/random");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

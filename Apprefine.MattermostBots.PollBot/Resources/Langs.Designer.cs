@@ -153,7 +153,7 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User {0} has created a poll &quot;{1}&quot;. The ID is {2}..
+        ///   Looks up a localized string similar to User {0} has created a poll &quot;{1}&quot;. The ID is {2}. Please add/update your answers with `/poll answer YOUR ANSWER`.
         /// </summary>
         internal static string OpenPollCreated {
             get {

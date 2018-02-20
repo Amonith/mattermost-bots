@@ -35,11 +35,32 @@ namespace Apprefine.MattermostBots.AllBots
         {
             //common for all bots
             services.Configure<MattermostOptions>(Configuration.GetSection("Mattermost"));
-            services.AddMvc(
-                config => {
-                    config.Filters.Add(typeof(ExceptionFilter));
-                }
-            );
+            services
+                .AddMvc(
+                    config =>
+                    {
+                        config.Filters.Add(typeof(ExceptionFilter));
+                    }
+                )
+                .ConfigureApplicationPartManager(p =>
+                {
+                    //exclude external controllers as we only use other
+                    //bots as libs
+                    var excludedFromRouting = new[]
+                    {
+                        "Apprefine.MattermostBots.PollBot",
+                        "Apprefine.MattermostBots.RandomBot",
+                        "Apprefine.MattermostBots.SkypeBot"
+                    };
+
+                    foreach (var item in excludedFromRouting)
+                    {
+                        var part = p.ApplicationParts.SingleOrDefault(x => x.Name == item);
+                        if(part != null)
+                            p.ApplicationParts.Remove(part);
+                    }
+                });
+
             services.AddTransient<MattermostSrv>();
             services.AddTransient<SlashCommandSrv>(
                 provider => new SlashCommandSrv(provider.GetServices<CommandHandlerFactory>())

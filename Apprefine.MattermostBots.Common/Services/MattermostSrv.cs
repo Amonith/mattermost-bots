@@ -53,5 +53,23 @@ namespace Apprefine.MattermostBots.Common.Services
                 );
             }
         }
+
+        public async Task<List<User>> GetUsersByIds(IEnumerable<string> ids)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_options.Value.ApiUrl);
+                client.DefaultRequestHeaders.Authorization
+                    = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _options.Value.Token);
+
+                var response = await client.PostAsync($"api/v4/users/ids", new JsonContent(ids));
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception($"Could not get users {string.Join(",", ids)}. Ensure that correct API token is set in bot's config.");
+
+                return JsonConvert.DeserializeObject<List<User>>(
+                    await response.Content.ReadAsStringAsync()
+                );
+            }
+        }
     }
 }

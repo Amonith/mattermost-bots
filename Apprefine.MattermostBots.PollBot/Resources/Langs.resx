@@ -120,6 +120,12 @@
   <data name="ActiveOpenPollExists" xml:space="preserve">
     <value>Only one open poll can be active per channel for answering simplicity. You can have many closed polls if you want.</value>
   </data>
+  <data name="ActivePollNotFound" xml:space="preserve">
+    <value>No such active poll was found in current channel.</value>
+  </data>
+  <data name="AnswerIdUsage" xml:space="preserve">
+    <value>Usage: `/poll answer_id ID YOUR ANSWER`. Where ID is an integer identificator of an active poll in current channel.</value>
+  </data>
   <data name="AnswerUpdated" xml:space="preserve">
     <value>Your answer in poll {0} has been updated. Thx :+1:</value>
     <comment>{0} - poll id</comment>
@@ -144,23 +150,35 @@
   <data name="NoAnswersFound" xml:space="preserve">
     <value>No answers found or there's no such poll in this channel.</value>
   </data>
+  <data name="NoPollsOnThisChannel" xml:space="preserve">
+    <value>There are no polls on this channel.</value>
+  </data>
+  <data name="NoPollToReopen" xml:space="preserve">
+    <value>Could not find a poll to reopen.</value>
+  </data>
   <data name="NotImplemented" xml:space="preserve">
     <value>Not implemented yet, stay tuned :)</value>
   </data>
   <data name="OpenPollClosed" xml:space="preserve">
-    <value>User {0} has closed the poll {1}. Everyone can display results with `/poll results`.</value>
+    <value>User {0} has closed the poll "{2}" (id = {1}). Everyone can display results with `/poll results`.</value>
     <comment>{0} - user name, {1} - poll id</comment>
   </data>
   <data name="OpenPollCreated" xml:space="preserve">
     <value>User {0} has created a poll "{1}". The ID is {2}. Please add/update your answers with `/poll answer YOUR ANSWER`</value>
     <comment>{0} - user name, {1} - poll description, {2} - poll id</comment>
   </data>
+  <data name="PollList" xml:space="preserve">
+    <value>This channel's polls:
+
+{0}</value>
+    <comment>Keep a new line above {0}. It's a table</comment>
+  </data>
+  <data name="ReopenUsage" xml:space="preserve">
+    <value>Usage: `/poll reopen [ID]`. Reopens an inactive poll. If ID is not supplied the last poll will be reopened.</value>
+  </data>
   <data name="ResultsUsage" xml:space="preserve">
     <value>Usage (brackets denote optional parameters):
 - `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest.</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
   </data>
   <data name="Usage" xml:space="preserve">
     <value>Usage (brackets denote optional parameters):
@@ -168,6 +186,12 @@
 - `/poll new open DESCRIPTION` - creates a new open poll. "Open" means that users can give text answers.
 - `/poll new closed ANSWERS DESCRIPTION` - NOT IMPLEMENTED
 - `/poll close` - closes your active poll. Nobody will be able to add more answers.
-- `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest.</value>
+- `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest.
+- `/poll answer_id ID YOUR ANSWER`. Where ID is an integer identificator of an active poll in current channel. Adds or updates an answer to a specific pool.
+- `/poll reopen [ID]`. Reopens an inactive poll. If ID is not supplied the last poll will be reopened.
+- `/poll list`. Displays a list of all polls in current channel.</value>
+  </data>
+  <data name="UserReopenedPoll" xml:space="preserve">
+    <value>User {0} reopened a poll "{1}" (id = {2}).</value>
   </data>
 </root>

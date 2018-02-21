@@ -70,6 +70,24 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No such active poll was found in current channel..
+        /// </summary>
+        internal static string ActivePollNotFound {
+            get {
+                return ResourceManager.GetString("ActivePollNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usage: `/poll answer_id ID YOUR ANSWER`. Where ID is an integer identificator of an active poll in current channel..
+        /// </summary>
+        internal static string AnswerIdUsage {
+            get {
+                return ResourceManager.GetString("AnswerIdUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your answer in poll {0} has been updated. Thx :+1:.
         /// </summary>
         internal static string AnswerUpdated {
@@ -135,6 +153,24 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no polls on this channel..
+        /// </summary>
+        internal static string NoPollsOnThisChannel {
+            get {
+                return ResourceManager.GetString("NoPollsOnThisChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find a poll to reopen..
+        /// </summary>
+        internal static string NoPollToReopen {
+            get {
+                return ResourceManager.GetString("NoPollToReopen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not implemented yet, stay tuned :).
         /// </summary>
         internal static string NotImplemented {
@@ -144,7 +180,7 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User {0} has closed the poll {1}. Everyone can display results with `/poll results`..
+        ///   Looks up a localized string similar to User {0} has closed the poll &quot;{2}&quot; (id = {1}). Everyone can display results with `/poll results`..
         /// </summary>
         internal static string OpenPollClosed {
             get {
@@ -162,21 +198,32 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This channel&apos;s polls:
+        ///
+        ///{0}.
+        /// </summary>
+        internal static string PollList {
+            get {
+                return ResourceManager.GetString("PollList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usage: `/poll reopen [ID]`. Reopens an inactive poll. If ID is not supplied the last poll will be reopened..
+        /// </summary>
+        internal static string ReopenUsage {
+            get {
+                return ResourceManager.GetString("ReopenUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Usage (brackets denote optional parameters):
         ///- `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest..
         /// </summary>
         internal static string ResultsUsage {
             get {
                 return ResourceManager.GetString("ResultsUsage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         
@@ -191,6 +238,15 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         internal static string Usage {
             get {
                 return ResourceManager.GetString("Usage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} reopened a poll &quot;{1}&quot; (id = {2})..
+        /// </summary>
+        internal static string UserReopenedPoll {
+            get {
+                return ResourceManager.GetString("UserReopenedPoll", resourceCulture);
             }
         }
     }

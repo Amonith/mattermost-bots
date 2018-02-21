@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActiveOpenPollExists" xml:space="preserve">
-    <value>Only one open poll can be active per channel for answering simplicity. You can have many closed polls if you want.</value>
-  </data>
   <data name="ActivePollNotFound" xml:space="preserve">
     <value>No such active poll was found in current channel.</value>
   </data>
@@ -185,7 +182,7 @@
 - `/poll answer YOUR ANSWER`. This will only work if there's an open poll in the channel. You can create new polls with `/poll new`.
 - `/poll new open DESCRIPTION` - creates a new open poll. "Open" means that users can give text answers.
 - `/poll new closed ANSWERS DESCRIPTION` - NOT IMPLEMENTED
-- `/poll close` - closes your active poll. Nobody will be able to add more answers.
+- `/poll close [ID]` - closes your active poll. Nobody will be able to add more answers. If ID is supplied closes this specific poll, otherwise latest.
 - `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest.
 - `/poll answer_id ID YOUR ANSWER`. Where ID is an integer identificator of an active poll in current channel. Adds or updates an answer to a specific pool.
 - `/poll reopen [ID]`. Reopens an inactive poll. If ID is not supplied the last poll will be reopened.

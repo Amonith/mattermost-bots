@@ -61,15 +61,6 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only one open poll can be active per channel for answering simplicity. You can have many closed polls if you want..
-        /// </summary>
-        internal static string ActiveOpenPollExists {
-            get {
-                return ResourceManager.GetString("ActiveOpenPollExists", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No such active poll was found in current channel..
         /// </summary>
         internal static string ActivePollNotFound {
@@ -232,8 +223,8 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         ///- `/poll answer YOUR ANSWER`. This will only work if there&apos;s an open poll in the channel. You can create new polls with `/poll new`.
         ///- `/poll new open DESCRIPTION` - creates a new open poll. &quot;Open&quot; means that users can give text answers.
         ///- `/poll new closed ANSWERS DESCRIPTION` - NOT IMPLEMENTED
-        ///- `/poll close` - closes your active poll. Nobody will be able to add more answers.
-        ///- `/poll results [ID]` - displays results of a poll. If ID is supplied - a specif [rest of string was truncated]&quot;;.
+        ///- `/poll close [ID]` - closes your active poll. Nobody will be able to add more answers. If ID is supplied closes this specific poll, otherwise latest.
+        ///- `/poll resu [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Usage {
             get {

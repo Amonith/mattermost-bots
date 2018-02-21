@@ -76,13 +76,6 @@ namespace Apprefine.MattermostBots.PollBot.Services
 
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
-                if (_dbContext.Polls.Any(p => p.ChannelId == req.channel_id && p.IsActive))
-                    return new MattermostResponse()
-                    {
-                        ResponseType = Common.Consts.ResponseType.Ephemeral,
-                        Text = Langs.ActiveOpenPollExists
-                    };
-
                 var poll = new Poll()
                 {
                     ChannelId = req.channel_id,
@@ -186,11 +179,25 @@ namespace Apprefine.MattermostBots.PollBot.Services
 
         private async Task<MattermostResponse> HandlePollClose(MattermostRequest req)
         {
-            //-if there is an active poll on current channel with OwnerId == req.UserId
-            //then close it
-            //else notify the user that he's retarded
+            var cmdParams = req.text.Split(" ").ToList();
 
-            var poll = _dbContext.Polls.SingleOrDefault(x => x.OwnerId == req.user_id && x.ChannelId == req.channel_id && x.IsActive);
+            int pollId = 0;
+            if(cmdParams.Count > 1)
+            {
+                if(!int.TryParse(cmdParams[1], out pollId))
+                {
+                    //TODO: return usage info
+                }
+            }
+
+            var poll = pollId > 0
+                ? _dbContext.Polls
+                    .SingleOrDefault(x => x.OwnerId == req.user_id && x.ChannelId == req.channel_id && x.IsActive && x.Id == pollId)
+                : _dbContext.Polls
+                    .Where(x => x.OwnerId == req.user_id && x.ChannelId == req.channel_id && x.IsActive)
+                    .OrderByDescending(x => x.CreatedAtUtc)
+                    .FirstOrDefault();
+
             if(poll == null)
             {
                 return new MattermostResponse()

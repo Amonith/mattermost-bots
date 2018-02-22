@@ -29,7 +29,7 @@ namespace Apprefine.MattermostBots.PollBot.Services
             Register("answer", HandlePollAnswer);
             Register("close", HandlePollClose);
             Register("results", HandlePollResults);
-            Register("answer_id", HandleAnswerId);
+            Register("idanswer", HandleAnswerId);
             Register("list", HandleList);
             Register("reopen", HandleReopen);
             Register("", PrintUsage);
@@ -382,7 +382,7 @@ namespace Apprefine.MattermostBots.PollBot.Services
                 };
             }
 
-            var ownerNames = await _mattermostSrv.GetUsersByIds(polls.Select(x => x.OwnerId).ToList());
+            var ownerNames = await _mattermostSrv.GetUsersByIds(polls.Select(x => x.OwnerId).Distinct().ToList());
             var ownerNamesDictionary = ownerNames.ToDictionary(x => x.id, x => x.username);
 
             var table = new TableBuilder();

@@ -121,7 +121,7 @@
     <value>No such active poll was found in current channel.</value>
   </data>
   <data name="AnswerIdUsage" xml:space="preserve">
-    <value>Usage: `/poll answer_id ID YOUR ANSWER`. Where ID is an integer identificator of an active poll in current channel.</value>
+    <value>Usage: `/poll idanswer ID YOUR ANSWER`. Where ID is an integer identificator of an active poll in current channel.</value>
   </data>
   <data name="AnswerUpdated" xml:space="preserve">
     <value>Your answer in poll {0} has been updated. Thx :+1:</value>
@@ -184,7 +184,7 @@
 - `/poll new closed ANSWERS DESCRIPTION` - NOT IMPLEMENTED
 - `/poll close [ID]` - closes your active poll. Nobody will be able to add more answers. If ID is supplied closes this specific poll, otherwise latest.
 - `/poll results [ID]` - displays results of a poll. If ID is supplied - a specific poll, otherwise latest.
-- `/poll answer_id ID YOUR ANSWER`. Where ID is an integer identificator of an active poll in current channel. Adds or updates an answer to a specific pool.
+- `/poll idanswer ID YOUR ANSWER`. Where ID is an integer identificator of an active poll in current channel. Adds or updates an answer to a specific pool.
 - `/poll reopen [ID]`. Reopens an inactive poll. If ID is not supplied the last poll will be reopened.
 - `/poll list`. Displays a list of all polls in current channel.</value>
   </data>

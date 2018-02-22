@@ -16,7 +16,11 @@ namespace Apprefine.MattermostBots.Common.Helpers
                 _columns[name] = new List<string>();
 
             //escape illegal characters (those which would break the table)
-            _columns[name].Add(value.Replace("|", "\\|"));
+            _columns[name].Add(
+                value
+                    .Replace("|", "\\|")
+                    .Replace("\n", " ") //newlines are not supported in tables at the moment
+            );
             return this;
         }
 

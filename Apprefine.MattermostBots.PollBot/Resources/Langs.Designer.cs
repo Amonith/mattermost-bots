@@ -70,7 +70,7 @@ namespace Apprefine.MattermostBots.PollBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usage: `/poll answer_id ID YOUR ANSWER`. Where ID is an integer identificator of an active poll in current channel..
+        ///   Looks up a localized string similar to Usage: `/poll idanswer ID YOUR ANSWER`. Where ID is an integer identificator of an active poll in current channel..
         /// </summary>
         internal static string AnswerIdUsage {
             get {
